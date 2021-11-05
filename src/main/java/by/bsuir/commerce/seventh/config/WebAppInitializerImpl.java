@@ -3,6 +3,7 @@ package by.bsuir.commerce.seventh.config;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 public class WebAppInitializerImpl extends AbstractAnnotationConfigDispatcherServletInitializer {
+
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return null;
@@ -15,6 +16,6 @@ public class WebAppInitializerImpl extends AbstractAnnotationConfigDispatcherSer
 
     @Override
     protected String[] getServletMappings() {
-        return new String[]{"/"};
+        return new String[0];
     }
 }
