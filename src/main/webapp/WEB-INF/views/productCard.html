@@ -1,0 +1,32 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="card(category, name, price, rating)">
+    <!-- product -->
+    <div class="product">
+        <div class="product-img">
+            <img src="./img/product06.png" alt="">
+        </div>
+        <div class="product-body">
+            <p class="product-category" th:text="${category}"></p>
+            <h3 class="product-name"><a href="#" th:text="${name}">Name</a></h3>
+            <h4 class="product-price">$
+                <a th:text="${price}" th:remove="tag"></a>
+            </h4>
+            <div class="product-rating">
+                <th:block th:each="rate : ${rating}">
+                    <i th:if="${rate == 1}" class="fa fa-star"></i>
+                    <i th:if="${rate == 0}" class="fa fa-star-0"></i>
+                </th:block>
+            </div>
+            <div class="product-btns">
+                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span
+                        class="tooltipp">add to wishlist</span></button>
+                <button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></button>
+            </div>
+        </div>
+        <div class="add-to-cart">
+            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+        </div>
+    </div>
+    <!-- /product -->
+</div>
+</html>

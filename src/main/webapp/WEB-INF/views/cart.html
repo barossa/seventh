@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>Electro - HTML Ecommerce Template</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" href="css/slick.css"/>
+    <link type="text/css" rel="stylesheet" href="css/slick-theme.css"/>
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" href="css/nouislider.min.css"/>
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<div th:include="../templates/header.html"></div>
+
+<div th:include="../templates/navigation.html"></div>
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header">Cart</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Blank</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container" style="margin-bottom: 2rem;">
+        <!-- row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="table-main table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Images</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Remove</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td class="thumbnail-img">
+                                <a href="#">
+                                    <img class="img-fluid" src="images/img-pro-01.jpg" alt="">
+                                </a>
+                            </td>
+                            <td class="name-pr">
+                                <a href="#">
+                                    Lorem ipsum dolor sit amet
+                                </a>
+                            </td>
+                            <td class="price-pr">
+                                <p>$ 80.0</p>
+                            </td>
+                            <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1"
+                                                            class="c-input-text qty text"></td>
+                            <td class="total-pr">
+                                <p>$ 80.0</p>
+                            </td>
+                            <td class="remove-pr">
+                                <a href="#">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="thumbnail-img">
+                                <a href="#">
+                                    <img class="img-fluid" src="images/img-pro-02.jpg" alt="">
+                                </a>
+                            </td>
+                            <td class="name-pr">
+                                <a href="#">
+                                    Lorem ipsum dolor sit amet
+                                </a>
+                            </td>
+                            <td class="price-pr">
+                                <p>$ 60.0</p>
+                            </td>
+                            <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1"
+                                                            class="c-input-text qty text"></td>
+                            <td class="total-pr">
+                                <p>$ 80.0</p>
+                            </td>
+                            <td class="remove-pr">
+                                <a href="#">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="thumbnail-img">
+                                <a href="#">
+                                    <img class="img-fluid" src="images/img-pro-03.jpg" alt="">
+                                </a>
+                            </td>
+                            <td class="name-pr">
+                                <a href="#">
+                                    Lorem ipsum dolor sit amet
+                                </a>
+                            </td>
+                            <td class="price-pr">
+                                <p>$ 30.0</p>
+                            </td>
+                            <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1"
+                                                            class="c-input-text qty text"></td>
+                            <td class="total-pr">
+                                <p>$ 80.0</p>
+                            </td>
+                            <td class="remove-pr">
+                                <a href="#">
+                                    <i class="fa fa-times"></i>
+                                </a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-6">
+                <div class="update-box">
+                    <input value="Update Cart" type="submit">
+                </div>
+            </div>
+
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- FOOTER-->
+<div th:include="../templates/footer.html"></div>
+
+<!-- jQuery Plugins -->
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/jquery.zoom.min.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>
