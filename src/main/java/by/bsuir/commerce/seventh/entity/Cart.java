@@ -1,24 +1,27 @@
 package by.bsuir.commerce.seventh.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "carts")
 public class Cart {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @OneToMany
-    private List<Good> goods;
+    @ManyToMany
+    private List<Product> products;
+
+    @OneToOne
+    private User owner;
 
     public Cart(){}
 
-    public Cart(long id, List<Good> goods) {
+    public Cart(long id, List<Product> products) {
         this.id = id;
-        this.goods = goods;
+        this.products = products;
     }
 
     public long getId() {
@@ -29,12 +32,12 @@ public class Cart {
         this.id = id;
     }
 
-    public List<Good> getGoods() {
-        return goods;
+    public List<Product> getProducts() {
+        return products;
     }
 
-    public void setGoods(List<Good> goods) {
-        this.goods = goods;
+    public void setProducts(List<Product> products) {
+        this.products = products;
     }
 
     @Override
@@ -45,13 +48,13 @@ public class Cart {
         Cart cart = (Cart) o;
 
         if (id != cart.id) return false;
-        return goods != null ? goods.equals(cart.goods) : cart.goods == null;
+        return products != null ? products.equals(cart.products) : cart.products == null;
     }
 
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (goods != null ? goods.hashCode() : 0);
+        result = 31 * result + (products != null ? products.hashCode() : 0);
         return result;
     }
 
@@ -59,7 +62,7 @@ public class Cart {
     public String toString() {
         return "Cart{" +
                 "id=" + id +
-                ", goods=" + goods +
+                ", products=" + products +
                 '}';
     }
 }

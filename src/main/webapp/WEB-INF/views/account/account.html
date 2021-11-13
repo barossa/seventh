@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title th:text="#{title.account}"></title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" th:href="@{~/css/bootstrap.min.css}"/>
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" th:href="@{~/css/slick.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{~/css/slick-theme.css}"/>
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" th:href="@{~/css/nouislider.min.css}"/>
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" th:href="@{~/css/font-awesome.min.css}">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" th:href="@{~/css/style.css}"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<div th:include="../templates/header.html"></div>
+
+<div th:include="../templates/navigation.html"></div>
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header" th:text="#{navagation.account}">Regular Page</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="/" th:text="#{navigation.home}">Home</a></li>
+                    <li class="active" sec:authentication="name">Future Username</li>
+                    <li class="active" sec:authentication="principal.authorities">Future Role</li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+<!-- Start My Account  -->
+<div class="my-account-box-main">
+    <div class="container">
+        <div class="my-account-page">
+            <div class="row">
+                <div sec:authorize="hasAuthority('ADMIN')" class="col-lg-4 col-md-12">
+                    <div class="account-box">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <a href="/account/admin/add-product"> <i class="fac fa-plus"></i> </a>
+                            </div>
+                            <div class="service-desc">
+                                <h4 th:text="#{account.goods}">Goods</h4>
+                                <p th:text="#{account.goodsDescr}">Add and control goods</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="account-box">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <a href="#"> <i class="fac fa-gift"></i> </a>
+                            </div>
+                            <div class="service-desc">
+                                <h4 th:text="#{account.orders}">Your Orders</h4>
+                                <p th:text="#{accnount.ordersDescr}">Track, return, or buy things again</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="account-box">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <a href="#"><i class="fac fa-lock"></i> </a>
+                            </div>
+                            <div class="service-desc">
+                                <h4 th:text="#{account.login}">Login security</h4>
+                                <p th:text="#{account.loginDescr}">Edit login, name, and mobile number</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="account-box">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <a href="#"> <i class="fac fa-location-arrow"></i> </a>
+                            </div>
+                            <div class="service-desc">
+                                <h4 th:text="#{account.address}">Your Addresses</h4>
+                                <p th:text="#{account.addressDescr}">Edit addresses for orders and gifts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <div class="account-box">
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <form th:action="@{/logout}" th:method="POST">
+                                    <button type="submit"><i class="fa fa-sign-out"></i></button>
+                                </form>
+                            </div>
+                            <div class="service-desc">
+                                <h4 th:text="#{account.out}">Your Addresses</h4>
+                                <p th:text="#{account.outDescr}">Edit addresses for orders and gifts</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End My Account -->
+
+<!-- FOOTER-->
+<div th:include="../templates/footer.html"></div>
+
+<!-- jQuery Plugins -->
+<script th:src="@{~/js/jquery.min.js}"></script>
+<script th:src="@{~/js/bootstrap.min.js}"></script>
+<script th:src="@{~/js/slick.min.js}"></script>
+<script th:src="@{~/js/nouislider.min.js}"></script>
+<script th:src="@{~/js/jquery.zoom.min.js}"></script>
+<script th:src="@{~/js/main.js}"></script>
+
+</body>
+</html>

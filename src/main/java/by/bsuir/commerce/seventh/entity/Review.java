@@ -1,11 +1,10 @@
 package by.bsuir.commerce.seventh.entity;
 
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table
+@Table(name = "reviews")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -13,9 +12,6 @@ public class Review {
 
     @ManyToOne
     private User author;
-
-    @ManyToOne
-    private Good good;
 
     private int rate;
 

@@ -1,0 +1,7 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:fragment="display(field)">
+    <th:block th:if="${#fields.hasErrors(__${field}__)}" th:each="error : ${#fields.errors(__${field}__)}">
+        <p style="color: #a51212" th:text="${error}"></p>
+    </th:block>
+</div>
+</html>

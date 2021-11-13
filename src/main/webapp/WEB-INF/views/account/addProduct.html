@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title th:text="#{title.addGood}">Electro - HTML Ecommerce Template</title>
+
+    <!-- Google font -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link type="text/css" rel="stylesheet" th:href="@{~/css/bootstrap.min.css}"/>
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" th:href="@{~/css/font-awesome.min.css}">
+
+    <!-- Slick -->
+    <link type="text/css" rel="stylesheet" th:href="@{~/css/slick.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{~/css/slick-theme.css}"/>
+
+    <!-- nouislider -->
+    <link type="text/css" rel="stylesheet" th:href="@{~/css/nouislider.min.css}"/>
+
+    <!-- Font Awesome Icon -->
+    <link rel="stylesheet" th:href="@{~/css/font-awesome.min.css}">
+
+    <!-- Custom stlylesheet -->
+    <link type="text/css" rel="stylesheet" th:href="@{~/css/style.css}"/>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- FILE INPUT -->
+    <link th:href="@{~/css/fileinput.css}" media="all" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" crossorigin="anonymous">
+    <link th:href="@{~/themes/explorer-fas/theme.css}" media="all" rel="stylesheet" type="text/css"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script th:src="@{~/js/plugins/piexif.js}" type="text/javascript"></script>
+    <script th:src="@{~/js/plugins/sortable.js}" type="text/javascript"></script>
+    <script th:src="@{~/js/fileinput.js}" type="text/javascript"></script>
+    <script th:src="@{~/js/locales/fr.js}" type="text/javascript"></script>
+    <script th:src="@{~/js/locales/es.js}" type="text/javascript"></script>
+    <script th:src="@{~/themes/fas/theme.js}" type="text/javascript"></script>
+    <script th:src="@{~/themes/explorer-fas/theme.js}" type="text/javascript"></script>
+
+
+</head>
+<body>
+
+<div th:include="../templates/header.html"></div>
+
+<div th:include="../templates/navigation.html"></div>
+
+<!-- BREADCRUMB -->
+<div id="breadcrumb" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="breadcrumb-header" th:text="#{product.nav}">Regular Page</h3>
+                <ul class="breadcrumb-tree">
+                    <li><a href="/" th:home="#{navigation.home}">Home</a></li>
+                    <li><a href="/account" th:text="#{navagation.account}">Account</a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /BREADCRUMB -->
+
+
+<!-- SECTION -->
+<div class="section">
+    <!-- container -->
+    <div class="container">
+
+        <!-- row -->
+        <div class="row">
+            <form enctype="multipart/form-data" th:method="POST" th:action="@{/add-product}">
+                <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+
+                <div class="col-md-7">
+                    <!-- Billing Details -->
+                    <div class="billing-details">
+                        <div class="section-title">
+                            <h3 class="title" th:text="#{product.details}">Product details</h3>
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="text" name="name" id="name" th:placeholder="#{product.title}">
+
+                            <th:block th:if="${errors?.containsKey('name')}" th:each="error : ${errors?.get('name')}">
+                                <p style="color: #a51212" th:text="${error}">SOme errors</p>
+                            </th:block>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="input" name="description" style="max-width: 100%"
+                                      th:placeholder="#{product.descr}"></textarea>
+                            <th:block th:if="${errors?.containsKey('description')}" th:each="error : ${errors?.get('description')}">
+                                <p style="color: #a51212" th:text="${error}">Some error</p>
+                            </th:block>
+                        </div>
+                        <div class="form-group">
+                            <input class="input textarea" type="text" name="category"
+                                   th:placeholder="#{product.category}" id="category">
+                            <th:block th:if="${errors?.containsKey('category')}" th:each="error : ${errors?.get('category')}">
+                                <p style="color: #a51212" th:text="${error}">Some error</p>
+                            </th:block>
+                        </div>
+                        <div class="form-group">
+                            <input class="input" type="number" min="0" name="price" th:placeholder="#{product.price}">
+                            <th:block th:if="${errors?.containsKey('price')}" th:each="error : ${errors?.get('price')}">
+                                <p style="color: #a51212" th:text="${error}">Some error</p>
+                            </th:block>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" style="margin-right: 2rem;" class="primary-btn order-submit" th:text="#{product.add}">Add product</button>
+                            <h3 class="section-title ml-3" style="display: contents;" th:if="${errors?.size() > 0}" th:text="#{product.notAdded}"></h3>
+                            <h3 class="section-title ml-3" style="display: contents;" th:if="${errors?.isEmpty()}" th:text="#{product.added}"></h3>
+                        </div>
+                    </div>
+                    <!-- /Billing Details -->
+
+                </div>
+
+                <!-- Order Details -->
+                <div class="col-md-5 order-details">
+                    <div class="section-title text-center">
+                        <h3 class="title" th:text="#{product.images}">Images</h3>
+                    </div>
+                    <form enctype="multipart/form-data">
+                        <input id="file" name="files" required class="file" type="file" multiple
+                               data-browse-on-zone-click="true"
+                               data-allowed-file-extensions='["png", "jpg", "jpeg"]'
+                               data-max-file-count="3"
+                               data-theme="fas">
+
+                    </form>
+                </div>
+            </form>
+        </div>
+        <!-- /Order Details -->
+    </div>
+    <!-- /row -->
+</div>
+<!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<!-- FOOTER-->
+<div th:include="../templates/footer.html"></div>
+
+<!-- jQuery Plugins -->
+<script th:src="@{~/js/bootstrap.min.js}"></script>
+<script th:src="@{~/js/slick.min.js}"></script>
+<script th:src="@{~/js/nouislider.min.js}"></script>
+<script th:src="@{~/js/jquery.zoom.min.js}"></script>
+<script th:src="@{~/js/main.js}"></script>
+
+</body>
+</html>

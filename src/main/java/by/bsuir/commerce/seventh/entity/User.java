@@ -1,9 +1,9 @@
 package by.bsuir.commerce.seventh.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
-@Table
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +23,14 @@ public class User {
 
     private String phone;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
+    private boolean active;
+
     public User() {
-        role = Role.USER;
+        this.role = Role.USER;
+        this.active = true;
     }
 
     public User(long id, String password, String login, String firstname, String lastname, String email, String address, String phone, Role role) {
@@ -39,6 +43,7 @@ public class User {
         this.address = address;
         this.phone = phone;
         this.role = role;
+        this.active = true;
     }
 
     public long getId() {
@@ -113,6 +118,14 @@ public class User {
         this.role = role;
     }
 
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -121,6 +134,7 @@ public class User {
         User user = (User) o;
 
         if (id != user.id) return false;
+        if (active != user.active) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
         if (login != null ? !login.equals(user.login) : user.login != null) return false;
         if (firstname != null ? !firstname.equals(user.firstname) : user.firstname != null) return false;
@@ -142,6 +156,7 @@ public class User {
         result = 31 * result + (address != null ? address.hashCode() : 0);
         result = 31 * result + (phone != null ? phone.hashCode() : 0);
         result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (active ? 1 : 0);
         return result;
     }
 
@@ -157,6 +172,7 @@ public class User {
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 ", role=" + role +
+                ", active=" + active +
                 '}';
     }
 
