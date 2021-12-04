@@ -7,15 +7,9 @@
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
                 <li><a href="/" th:text="#{navigation.home}">Home</a></li>
-                <th:block th:each="category : ${@Categories}">
-                    <li><a href="#" th:text="#{category.__${category}__}">Hot Deals</a></li>
+                <th:block th:each="category, iStat : ${@categories}">
+                    <li><a th:href="@{/catalog?category=__${iStat.index}__}" th:text="#{category.__${category}__}">Hot Deals</a></li>
                 </th:block>
-                <!--<li><a href="#">Hot Deals</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Laptops</a></li>
-                <li><a href="#">Smartphones</a></li>
-                <li><a href="#">Cameras</a></li>
-                <li><a href="#">Accessories</a></li>-->
             </ul>
             <!-- /NAV -->
         </div>

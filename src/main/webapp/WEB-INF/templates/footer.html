@@ -22,7 +22,7 @@
                     <div class="footer">
                         <h3 class="footer-title">Categories</h3>
                         <ul class="footer-links">
-                            <th:block th:each="category, iStat : ${@Categories}">
+                            <th:block th:each="category, iStat : ${@categories}">
                                 <li><a th:href="@{/catalog?category={id}(id=${iStat.index})}"
                                        th:text="#{'category.' + __${category}__}">Hot deals</a>
                                 </li>

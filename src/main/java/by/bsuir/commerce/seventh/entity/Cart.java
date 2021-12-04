@@ -2,6 +2,7 @@ package by.bsuir.commerce.seventh.entity;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,7 +18,9 @@ public class Cart {
     @OneToOne
     private User owner;
 
-    public Cart(){}
+    public Cart(){
+        products = new ArrayList<>();
+    }
 
     public Cart(long id, List<Product> products) {
         this.id = id;
@@ -38,6 +41,14 @@ public class Cart {
 
     public void setProducts(List<Product> products) {
         this.products = products;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 
     @Override

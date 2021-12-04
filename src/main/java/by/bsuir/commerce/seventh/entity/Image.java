@@ -5,6 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "product_images")
 public class Image{
+    private static final String BASE64_PREFIX = "data:image/png;base64,";
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
 
@@ -30,7 +32,7 @@ public class Image{
 
     @Override
     public String toString(){
-        return base64;
+        return BASE64_PREFIX + base64;
     }
 
     @Override

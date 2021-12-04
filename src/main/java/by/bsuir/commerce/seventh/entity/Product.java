@@ -7,6 +7,7 @@ import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalDouble;
 
 @Entity
 @Table(name = "products")
@@ -15,13 +16,12 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Pattern(regexp = "^[A-Za-zА-Яа-я0-9]*$", message = "Invalid name. Only letters and digits!")
-    @Pattern(regexp = "^.{5,30}$", message = "Name must be between 5 and 30 characters!")
+    /*@Pattern(regexp = "^[A-Za-zА-Яа-я0-9 ]*$", message = "Invalid name. Only letters and digits!")
+    @Pattern(regexp = "^.{5,30}$", message = "Name must be between 5 and 30 characters!")*/
     private String name;
 
-    @NotEmpty(message = "Description must not be empty")
-    @Size(min=20 ,max = 255, message = "Description size is incorrect")
-    @Pattern(regexp = "^[A-Za-zА-Яа-я0-9.,;!?\"№%&]$", message = "Description contains invalid characters!")
+    /*@Size(min=10 ,max = 255, message = "Description size is incorrect")
+    @Pattern(regexp = "^[A-Za-zА-Яа-я0-9.,;!?\"№%& ]*$", message = "Description contains invalid characters!")*/
     private String description;
 
     @Min(1)
@@ -32,11 +32,12 @@ public class Product {
     @NotEmpty(message = "Category must not be empty")
     private String category;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Image> images;
 
     @OneToMany()
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Review> reviews;
 
     public Product() {
@@ -117,6 +118,10 @@ public class Product {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public int getRating(){
+        return ReviewUtil.averageRate(reviews);
     }
 
     @Override

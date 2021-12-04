@@ -8,7 +8,7 @@ import java.util.List;
 @Configuration
 public class ShopConfiguration {
 
-    @Bean(name = "Categories")
+    @Bean(name = "categories")
     public List<String> categories() {
         return List.of(
                 "GAMING",

@@ -1979,6 +1979,8 @@ textarea.input {
 
 /*ACCOUNT END*/
 
+.user-cart .guest-cart{}
+
 /*COLLAPSE STYLES*/
 .list-group-item[data-toggle="collapse"]::after {
   width: 0;

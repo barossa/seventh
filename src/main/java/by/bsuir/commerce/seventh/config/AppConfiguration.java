@@ -1,5 +1,6 @@
 package by.bsuir.commerce.seventh.config;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ApplicationContext;
@@ -8,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.LocaleResolver;
@@ -19,6 +22,7 @@ import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
+import javax.sql.DataSource;
 import java.util.Set;
 
 @Configuration
@@ -86,6 +90,21 @@ public class AppConfiguration implements WebMvcConfigurer {
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
+
+    /*@Bean
+    public SessionFactory sessionFactory(){
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        return transactionManager;
+    }
+*/
+    /*@Bean
+    public LocalSessionFactoryBean sessionFactory(DataSource dataSource){
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource);
+        sessionFactory.setPackagesToScan("by.bsuir.commerce.seventh.entity");
+        return sessionFactory;
+
+    }*/
 
     /*@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

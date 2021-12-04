@@ -19,15 +19,16 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
-                            <select class="input-select">
-                                <th:block th:each="category, iStat : ${@Categories}">
-                                    <option th:value="${iStat.index}"
+                        <form th:action="@{/catalog}" method="get">
+                            <select name="category" class="input-select">
+                                <th:block th:each="category, iStat : ${@categories}">
+                                    <option name="category" th:value="${iStat.index}"
                                             th:text="#{'category.' + __${category}__}">Category</option>
                                 </th:block>
+                                <option name="category" value="" th:text="#{category.ANY}">Category</option>
                             </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <input type="text" name="query" class="input" placeholder="Search here">
+                            <button type="submit" class="search-btn">Search</button>
                         </form>
                     </div>
                 </div>
@@ -37,7 +38,7 @@
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
                         <!-- Wishlist -->
-                        <div>
+                        <div sec:authorize="isAuthenticated()">
                             <a href="#">
                                 <i class="fa fa-heart"></i>
                                 <span><i th:text="#{header.wishlist}" th:remove="tag"></i></span>
@@ -47,45 +48,16 @@
                         <!-- /Wishlist -->
 
                         <!-- Cart -->
-                        <div class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                        <div>
+                            <a id="cart" href="/cart">
                                 <i class="fa fa-shopping-cart"></i>
-                                <span th:text="#{header.cart}" href=""><!--<i th:text="" th:remove="tag"></i>--></span>
-                                <div class="qty">3</div>
+                                <span th:text="#{header.cart}"></span>
+                                <div id="cart-qty" class="qty" th:if="${session.cart != null && session.cart.products.size() > 0}" th:text="${session.cart?.products.size()}">0</div>
                             </a>
-                            <div class="cart-dropdown">
-                                <div class="cart-list">
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="./img/product01.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
-                                        </div>
-                                    </div>
-
-                                    <div class="product-widget">
-                                        <div class="product-img">
-                                            <img src="./img/product02.png" alt="">
-                                        </div>
-                                        <div class="product-body">
-                                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                                            <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="cart-summary">
-                                    <small>3 Item(s) selected</small>
-                                    <h5>SUBTOTAL: $2940.00</h5>
-                                </div>
-                                <div class="cart-btns">
-                                    <a href="/cart" th:text="#{header.viewCart}">View Cart</a>
-                                    <a href="/checkout" th:text="#{header.checkout}">Checkout <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
                         </div>
-                        <!-- /Cart -->
+                        <!-- Cart -->
+
+
 
                         <!-- Account -->
                         <div>

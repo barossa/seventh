@@ -1,0 +1,9 @@
+User-agent: *
+Disallow:
+Disallow: /css
+Disallow: /js
+Disallow: /fonts
+Disallow: /img
+Disallow: /scss
+Disallow: /themes
+Sitemap: https://5a28-5-100-193-200.ngrok.io/sitemap.xml

@@ -6,6 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
+    <!--Support ajax calls with csrf-->
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+
     <title th:text="#{title.cart}">Electro - HTML Ecommerce Template</title>
 
     <!-- Google font -->
@@ -51,7 +54,6 @@
                 <h3 class="breadcrumb-header">Cart</h3>
                 <ul class="breadcrumb-tree">
                     <li><a href="#">Home</a></li>
-                    <li class="active">Blank</li>
                 </ul>
             </div>
         </div>
@@ -69,102 +71,46 @@
         <!-- row -->
         <div class="row">
             <div class="col-lg-12">
-                <div class="table-main table-responsive">
-                    <table class="table">
+                <div id="table-container" class="table-main table-responsive">
+                    <h3 th:if="${session.cart?.products.size == 0}" th:text="#{cart.empty}"></h3>
+                    <table id="product-table" class="table" th:if="${session.cart?.products.size > 0}">
                         <thead>
                         <tr>
-                            <th>Images</th>
-                            <th>Product Name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Total</th>
-                            <th>Remove</th>
+                            <th th:text="#{cart.image}">Image</th>
+                            <th th:text="#{cart.name}">Product Name</th>
+                            <th th:text="#{cart.price}">Price</th>
+                            <th th:text="#{cart.remove}">Remove</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
+                        <tr th:each="product : ${session.cart?.products}">
                             <td class="thumbnail-img">
-                                <a href="#">
-                                    <img class="img-fluid" src="images/img-pro-01.jpg" alt="">
+                                <a>
+                                    <img style="max-width: 120px; max-height: 120px;" class="img-fluid" th:src="${product.images.get(0)}" alt="">
                                 </a>
                             </td>
                             <td class="name-pr">
-                                <a href="#">
+                                <a th:text="${product.name}">
                                     Lorem ipsum dolor sit amet
                                 </a>
                             </td>
                             <td class="price-pr">
-                                <p>$ 80.0</p>
+                                <p th:text="#{header.static.currency}" th:remove="tag"></p>
+                                <p th:text="${product.price}">80.0</p>
                             </td>
-                            <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1"
-                                                            class="c-input-text qty text"></td>
-                            <td class="total-pr">
-                                <p>$ 80.0</p>
-                            </td>
-                            <td class="remove-pr">
-                                <a href="#">
+                            <td sec:authorize="isAnonymous()" class="remove-pr rm-g" th:id="${product.id}">
+                                <a>
                                     <i class="fa fa-times"></i>
                                 </a>
                             </td>
-                        </tr>
-                        <tr>
-                            <td class="thumbnail-img">
-                                <a href="#">
-                                    <img class="img-fluid" src="images/img-pro-02.jpg" alt="">
-                                </a>
-                            </td>
-                            <td class="name-pr">
-                                <a href="#">
-                                    Lorem ipsum dolor sit amet
-                                </a>
-                            </td>
-                            <td class="price-pr">
-                                <p>$ 60.0</p>
-                            </td>
-                            <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1"
-                                                            class="c-input-text qty text"></td>
-                            <td class="total-pr">
-                                <p>$ 80.0</p>
-                            </td>
-                            <td class="remove-pr">
-                                <a href="#">
-                                    <i class="fa fa-times"></i>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="thumbnail-img">
-                                <a href="#">
-                                    <img class="img-fluid" src="images/img-pro-03.jpg" alt="">
-                                </a>
-                            </td>
-                            <td class="name-pr">
-                                <a href="#">
-                                    Lorem ipsum dolor sit amet
-                                </a>
-                            </td>
-                            <td class="price-pr">
-                                <p>$ 30.0</p>
-                            </td>
-                            <td class="quantity-box"><input type="number" size="4" value="1" min="0" step="1"
-                                                            class="c-input-text qty text"></td>
-                            <td class="total-pr">
-                                <p>$ 80.0</p>
-                            </td>
-                            <td class="remove-pr">
-                                <a href="#">
+                            <td sec:authorize="isAuthenticated()" class="remove-pr rm-u" th:id="${product.id}">
+                                <a>
                                     <i class="fa fa-times"></i>
                                 </a>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-sm-6">
-                <div class="update-box">
-                    <input value="Update Cart" type="submit">
                 </div>
             </div>
 
